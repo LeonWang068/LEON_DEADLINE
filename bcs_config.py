@@ -1,0 +1,11 @@
+ACCESS_ID = ""
+ACCESS_KEY = ""
+SECURITY_TOKEN = ""
+
+REGION = "cn-hangzhou"
+ENDPOINT = "batchcompute.%s.aliyuncs.com" % REGION
+
+MAX_RETRY_COUNT = 10
+MAX_RETRY_TIME = 60*1000 #60s
+WAIT_RANDOM_MIN = 1*1000
+WAIT_RANDOM_MAX = 5*1000
