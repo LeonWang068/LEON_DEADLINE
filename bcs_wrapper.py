@@ -55,9 +55,9 @@ def delete_node_by_ip(cluster_id, group_name, ipaddr):
     if not node_id:
         warnings.warn("IP %s not found in group(%s) of cluster(%s)" % (ipaddr, group_name, cluster_id), RuntimeWarning)
         return
-
+    
     client = get_bcs_client()
-
+    
     @retry(stop_max_attempt_number=MAX_RETRY_COUNT,
         stop_max_delay=MAX_RETRY_TIME,
         retry_on_exception=is_retry_error,
@@ -65,7 +65,6 @@ def delete_node_by_ip(cluster_id, group_name, ipaddr):
         wait_random_max=WAIT_RANDOM_MAX)
     def delete_wrapper(cluster_id, group_name, node_id):
         try:
-            print "haha"
             return client.delete_cluster_instance(cluster_id, group_name, node_id)
         except ClientError, e:
             if e.get_status_code() == 409:
@@ -81,5 +80,5 @@ if __name__ == '__main__':
     cluster_id = "cls-6kip6824almskjp5smc00k"
     group_name = "group"
     ip = "10.28.151.20"
-    print get_node_from_ip(cluster_id, group_name, ip)
+
     delete_node_by_ip(cluster_id, group_name, ip)
